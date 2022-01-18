@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Laura & Matt's Wedding Photobooth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-csrf="<!-- CSRF -->">
+    <header>
+      <div id="logo">
+        <a href="//laura-and-matts.wedding">
+          <img
+            src="https://cdn.glitch.global/583dcc25-aa4e-49bf-a5e6-37489e915e3a/logo.png?v=1642272357163"
+          />
+        </a>
+      </div>
+      <h1><span>Photobooth</span></h1>
+    </header>
+
+    <main>
+      <p id="statustext" class="status-text">Warming up...</p>
+
+      <video autoplay="autoplay" id="video"></video>
+
+      <div class="video-mirror-container mar-bottom">
+        <canvas id="videomirror" class="video-mirror"></canvas>
+      </div>
+
+      <button id="shutter" class="btn shutter-button">Push to start</button>
+
+      <!--   Overlay once gifs are ready   -->
+      <div id="preview-wrapper" class="preview-wrapper">
+        <img id="preview" class="preview" />
+        <div class="links">
+          <div class="send-gif_container"></div>
+          <p>
+            <a href="#" id="downloadlink" class="preview-download-btn"
+              >⇩ Download</a
+            >
+          </p>
+          <p>
+            <a href="#" id="closelink" class="preview-download-btn"
+              >♲ Do over?
+            </a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+    <script src="pttjpeg.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

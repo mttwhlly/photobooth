@@ -1,0 +1,45 @@
+/* page header */
+
+header {
+  width: 100%;
+  display: block;
+}
+
+header #logo {
+  padding: $space;
+}
+
+header img {
+  width: 40px;
+}
+
+header #info a {
+  color: #DFD3C8;
+  text-decoration: none;
+  font-family: 'TT-Drugs', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .5px;
+}
+
+header h1 {
+  position: relative;
+  margin: 0;
+  font-family: 'Sweet-Sans';
+  font-size: 3rem;
+  padding-top: 0;
+	text-transform: uppercase;
+	color: #DFD3C7;
+	/* Will override color (regardless of order) */
+	-webkit-text-fill-color: #DFD3C7;
+	-webkit-text-stroke-width: 1.5px;
+	-webkit-text-stroke-color: #CD993D;
+}
+
+header h1 span {
+  color: #45592B;
+	/* Will override color (regardless of order) */
+	-webkit-text-fill-color: #DFD3C7;
+	-webkit-text-stroke-width: 1.5px;
+	-webkit-text-stroke-color: #CD993D;
+  text-decoration: none;
+}

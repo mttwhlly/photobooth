@@ -1,0 +1,28 @@
+video {
+  display: none;
+}
+
+
+.video-mirror-container {
+  @include centered;
+  width: 75%;
+
+  border: 0 none;
+/*   padding: 0 0 1.4rem 1.4rem; */
+/*   background: pink; */
+  position: relative;
+  color: #000;
+  font-size: 1rem;
+  
+  @media screen and ($large-only) {
+    // magic number that seems to always mean that the button is visible on both ipad and desktop
+    max-width: 625px;
+  }
+}
+
+.video-mirror {
+  background: transparent;
+  padding: $space;
+  border: 1.8px solid #CD993D;
+  width: 100%;
+}
