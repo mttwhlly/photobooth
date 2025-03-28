@@ -1,14 +1,13 @@
-# Laura & Matt's Wedding Photobooth
+# Photobooth Web App
 
-## About
+## Getting Started
 
-Javascript Photobooth web app for our virtual wedding ceremony (...thanks COVID).
+To get started with the Photobooth web app, follow these steps:
 
-- Original [Gif Photobooth app](https://gif-photobooth.glitch.me/#) made by [Samuel Mortenson](https://glitch.com/@mortenson)
-- Remixed by [Steph](https://glitch.com/@smonette) and [Potch](https://glitch.com/@potch) at Glitch.
-- Re-remixed by [Matt](https://glitch.com/@mttwhlly).
+### Install Dependencies
 
-## How to use
+`npm install`
 
-1. Remix this app
-2. Style it and enjoy!
+### Start the Server
+
+`npm run start`
