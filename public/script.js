@@ -83,11 +83,7 @@
     );
   }
 
-  function sleep(time) {
-    return new Promise(function(resolve) {
-      setTimeout(resolve, time);
-    });
-  }
+  const sleep = (time) => new Promise(resolve => setTimeout(resolve, time));
 
   function setStatus(text, body_class) {
     var status = document.getElementById("statustext");
@@ -226,41 +222,50 @@
     // sendBtn.innerHTML = phoneBtnDefault;
   }
 
-  function startCapture() {
-    if (ready && !running) {
+  async function startCapture() {
+    if (!(ready && !running)) {
+      toggleCaptureButton();
+      return;
+    }
+    
+    try {
       setStatus("Get ready...", "ready");
       previewWrapper.classList.remove("active");
       running = true;
-      var num_frames = config("num_frames");
-      var frame_delay = config("frame_delay");
-      var pose_time = frame_delay * num_frames;
-      var frames = prepFrames();
-      var rows = config("num_poses");
+      
+      const num_frames = config("num_frames");
+      const frame_delay = config("frame_delay");
+      const pose_time = frame_delay * num_frames;
+      const frames = prepFrames();
+      const rows = config("num_poses");
+      
       for (let i = 0; i < rows; ++i) {
         setCountdown(i);
-        sleep(config("prep_time") * (i + 1) + pose_time * i).then(function() {
-          for (let j = 0; j < num_frames; ++j) {
-            sleep(frame_delay * j).then(function() {
-              // setStatus("Pose!", "pose");
-              drawPose(frames[j], i);
-              if (j === num_frames - 1) {
-                console.log("ready to ready");
-                setStatus("Pose!", "pose");
-                // setStatus("Get Ready...", "ready");
-              }
-              if (i === rows - 1 && j === num_frames - 1) {
-                setStatus("Pose!", "pose");
-                console.log("ready to compile");
-                // compileGIF(frames);
-                compileJPG(frames);
-              }
-            });
+        await sleep(config("prep_time") * (i + 1) + pose_time * i);
+        
+        for (let j = 0; j < num_frames; ++j) {
+          await sleep(frame_delay * j);
+          drawPose(frames[j], i);
+          
+          if (j === num_frames - 1) {
+            console.log("ready to ready");
+            setStatus("Pose!", "pose");
           }
-        });
+          
+          if (i === rows - 1 && j === num_frames - 1) {
+            setStatus("Pose!", "pose");
+            console.log("ready to compile");
+            await compileJPG(frames);
+          }
+        }
       }
+    } catch (error) {
+      console.error("Error in capture process:", error);
+      setStatus("An error occurred", "error");
+      running = false;
+    } finally {
+      toggleCaptureButton();
     }
-    // changes button styling
-    toggleCaptureButton();
   }
 
   shutterBtn.onclick = startCapture;
@@ -313,110 +318,98 @@
   }
 
   if (navigator && navigator.mediaDevices) {
-    navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: "user" } })
-      .then(function(stream) {
-        var video = document.getElementById("video");
-        video.srcObject = stream;
-        video.play();
-        video.addEventListener(
-          "canplay",
-          function() {
-            function start() {
-              setTimeout(function() {
-                ready = true;
-                setStatus("Ready!");
-                function update() {
-                  drawVideoMirror(video);
-                  requestAnimationFrame(update);
-                }
-                update();
-              }, config("ramp_time"));
-            }
-
-            if (config("footer_image")) {
-              footerImage.onload = start;
-              footerImage.src = config("footer_image");
-            } else {
-              start();
-            }
-          },
-          false
-        );
-      })
-      .catch(function(e) {
-        console.log(e);
-        setStatus("Webcam issues. Did you deny access?", "error");
+// Camera initialization using async/await
+async function initializeCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ 
+      video: { 
+        facingMode: "user",
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      } 
+    });
+    
+    const video = document.getElementById("video");
+    video.srcObject = stream;
+    video.play();
+    
+    // Convert the canplay event to a Promise
+    await new Promise(resolve => {
+      video.addEventListener("canplay", resolve, { once: true });
+    });
+    
+    // Start function wrapped in async
+    const start = async () => {
+      await sleep(config("ramp_time"));
+      ready = true;
+      setStatus("Ready!");
+      
+      function update() {
+        drawVideoMirror(video);
+        requestAnimationFrame(update);
+      }
+      update();
+    };
+    
+    // Handle footer image loading
+    if (config("footer_image")) {
+      await new Promise(resolve => {
+        footerImage.onload = resolve;
+        footerImage.src = config("footer_image");
       });
+      await start();
+    } else {
+      await start();
+    }
+    
+  } catch (error) {
+    console.error(error);
+    setStatus("Webcam issues. Did you deny access?", "error");
+  }
+}
   } else {
     setStatus("Incompatible browser. Chrome latest works!", "error");
   }
 
-  // let phoneNumber = document.getElementById('phone-number')
+  initializeCamera();
 
-  //   phoneNumber.oninput = function(){
-  //     // checks that phone number is valid
-  //     const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/
-
-  //     let isValid = phoneNumberPattern.test(phoneNumber.value)
-
-  //     if (isValid) {
-  //         sendBtn.removeAttribute("disabled")
-  //         sendBtn.innerHTML = phoneBtnValid
-  //     } else {
-  //       sendBtn.disabled = true
-  //       sendBtn.innerHTML = phoneBtnDefault
-  //     }
-
-  //   }
-
-  // TODO: upload to wedding site instead of twilio
-
-  function uploadMedia(blob, url) {
-    console.log(blob);
-    console.log(url);
-    const token = document.body.getAttribute("data-csrf");
-
-    // sendBtn.disabled = true;
-    // sendBtn.innerHTML = phoneBtnWorking;
-
-    fetch("/upload", {
-      credentials: "same-origin",
-      body: "{\"data\": \"" + blob + "\"}",
-      method: "POST",
-      headers: {
-        "CSRF-Token": token,
-        "content-type": "application/json",
-        imgUrl: url
-      }
-    })
-      // .then(res => res.json())
-      // .then(res => {
-      //   let id = res.id;
-      //   // let phone = document.querySelector("#phone-number").value;
-      //   // if (!phone) {
-      //   //   return;
-      //   // }
-      //   return fetch("/mms", {
-      //     credentials: "same-origin",
-      //     body: JSON.stringify({
-      //       media: id
-      //       // phone
-      //     }),
-      //     method: "POST",
-      //     headers: {
-      //       "CSRF-Token": token,
-      //       "content-type": "application/json"
-      //     }
-      //   }).then(res => {
-      //     console.log(res);
-      //     alert("Yay, message sent! Check your device!");
-      //     resetForm();
-      //   });
-      // })
-      .catch(e => {
-        console.error(e);
-        alert("Oh no! Something went wrong. Try again.");
+  async function uploadMedia(blob, url) {
+    try {
+      console.log(blob);
+      console.log(url);
+      const token = document.body.getAttribute("data-csrf");
+  
+      // Convert FileReader callback to Promise
+      const base64data = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
       });
+      
+      console.log(base64data);
+      
+      // Now we can use await with fetch
+      const response = await fetch("/upload", {
+        credentials: "same-origin",
+        body: JSON.stringify({ data: encodeURIComponent(base64data) }),
+        method: "POST",
+        headers: {
+          "CSRF-Token": token,
+          "content-type": "application/json",
+          imgUrl: url
+        }
+      });
+      
+      // Optional: handle response
+      if (!response.ok) {
+        throw new Error(`Upload failed with status: ${response.status}`);
+      }
+      
+      return response;
+    } catch (error) {
+      console.error(error);
+      alert("Oh no! Something went wrong. Try again.");
+    }
   }
 })();

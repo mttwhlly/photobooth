@@ -2,24 +2,14 @@
 const express = require("express");
 const app = express();
 const fs = require("fs-extra");
-const uuid = require("uuid/v4");
+const { v4: uuid } = require("uuid");
 const csrf = require("csurf");
-const Twilio = require("twilio");
-const sassMiddleware = require("node-sass-middleware");
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary");
 const streamifier = require("streamifier");
 const myParser = require("body-parser");
 
 const MAX_MEDIA_AGE = 1000 * 60 * 5;
 const mediaDir = __dirname + "/.data/media/";
-
-// sass needs to go before static file serving to work
-app.use(
-  sassMiddleware({
-    src: __dirname + "/source",
-    dest: __dirname + "/public"
-  })
-);
 
 // static file serving
 app.use(express.static("public"));

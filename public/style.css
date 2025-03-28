@@ -1,257 +1,313 @@
+/* Base styling */
 * {
-  box-sizing: border-box; }
-
-.mar-bottom {
-  margin-bottom: 2rem; }
-
-@font-face {
-  font-family: 'Garamond';
-  src: url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161956a6b51536d021dfc1/1595283798852/GaramondThree.woff2") format("woff2"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619532fb07e1186e05b0d/1595283795938/GaramondThree.woff") format("woff"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16194fa6b51536d021dd87/1595283791677/GaramondThree.ttf") format("truetype");
-  /* Safari, Android, iOS */ }
-
-@font-face {
-  font-family: 'Garamond-Italic';
-  src: url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161971fe54dd5188a48a1b/1595283825938/GaramondThree-Italic.woff2") format("woff2"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16196c7057b538deb89d70/1595283821065/GaramondThree-Italic.woff") format("woff"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161967906e646bb464562c/1595283815911/GaramondThree-Italic.ttf") format("truetype");
-  /* Safari, Android, iOS */ }
-
-@font-face {
-  font-family: 'TT-Drugs';
-  src: url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619897057b538deb8a55a/1595283849738/TTDrugs-Bold.woff2") format("woff2"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619853b72027be1c13f78/1595283846003/TTDrugs-Bold.woff") format("woff"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16197fa6b51536d021e572/1595283839907/TTDrugs-Bold.ttf") format("truetype");
-  /* Safari, Android, iOS */ }
-
-@font-face {
-  font-family: 'Canela';
-  src: url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619448cc72b1ccfd0dc61/1595283780808/Canela-Thin.woff2") format("woff2"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161941e1f89b30f983d09d/1595283777673/Canela-Thin.woff") format("woff"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16193caba56b06240fc344/1595283772539/Canela-Thin.ttf") format("truetype");
-  /* Safari, Android, iOS */ }
-
-@font-face {
-  font-family: 'Sweet-Sans';
-  src: url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c21a693541395463656/1595284514311/SweetSansPro-Bold.woff2") format("woff2"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c1e9fc86a3cecd2cda9/1595284510710/SweetSansPro-Bold.woff") format("woff"), url("https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c19e05f851dbe94c117/1595284506202/SweetSansPro-Bold.ttf") format("truetype");
-  /* Safari, Android, iOS */ }
-
-@keyframes pulse {
-  0% {
-    opacity: 0.5; }
-  50% {
-    opacity: 1.0; }
-  100% {
-    opacity: 0.5; } }
-
-@keyframes pulse-color {
-  0% {
-    background: #FFF; }
-  50% {
-    background-color: #F6D06B; }
-  100% {
-    background: #FFF; } }
-
-body {
-  font-family: "TT-Drugs", "Helvetica Neue", helvetica, arial, sans-serif;
-  font-size: 16px;
-  background: #062232;
-  color: white;
-  text-align: center;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh; }
-
-/*  Flash white when photo is in progress */
-body.pose {
-  animation: pulse-color 1s infinite;
-  animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
-
-body.error {
-  background-color: #CD993D; }
-
-body.pose #statustext,
-body.ready #statustext {
-  animation: pulse 1s infinite;
-  animation-timing-function: cubic-bezier(0.4, 0, 1, 1); }
-
-.status-text {
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  /*   margin-top: $space; */
-  /*   margin-bottom: $space; */
-  color: #CD993D;
-  font-size: 20px;
-  font-family: 'Ogg';
-  /*   text-transform: uppercase; */ }
-
-main {
-  margin-bottom: 2rem; }
-
-main a,
-footer a {
-  color: #DFD3C8;
-  text-decoration: none;
-  font-size: 16px; }
-
-main p {
-  font-family: 'Canela';
-  /*   text-transform: uppercase; */
-  letter-spacing: 2px;
-  /*   padding-top: 2*$space; */
-  font-size: 1.25rem;
-  color: #DFD3C8; }
-
-footer {
-  /*   padding: 1rem; */ }
-
-.sms-status-header {
-  /*   margin-bottom: 6rem; */
-  margin-top: 4rem;
-  font-size: 3rem; }
-
-/*  BUTTON STYLING */
-.btn {
-  display: inline-block;
-  height: 60px;
-  padding-right: 2.5rem;
-  padding-left: 2.5rem;
-  padding-top: 10px;
-  padding-bottom: 8px;
-  background: #062232;
-  color: #CD993D;
-  font-family: 'TT-Drugs', sans-serif;
-  font-size: 24px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border: 1.8px solid #CD993D;
-  outline: none;
-  text-align: center;
-  cursor: pointer;
-  transition: .5s; }
-
-.btn:hover,
-.btn:focus,
-.btn:active {
-  background: #CD993D;
-  color: #062232;
-  transition: .5s; }
-
-.btn:disabled {
-  background: #062232; }
-
-/* page header */
-header {
-  width: 100%;
-  display: block; }
-
-header #logo {
-  padding: 1.25rem; }
-
-header img {
-  width: 40px; }
-
-header #info a {
-  color: #DFD3C8;
-  text-decoration: none;
-  font-family: 'TT-Drugs', sans-serif;
-  font-size: .75rem;
-  letter-spacing: .5px; }
-
-header h1 {
-  position: relative;
-  margin: 0;
-  font-family: 'Sweet-Sans';
-  font-size: 3rem;
-  padding-top: 0;
-  text-transform: uppercase;
-  color: #DFD3C7;
-  /* Will override color (regardless of order) */
-  -webkit-text-fill-color: #DFD3C7;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: #CD993D; }
-
-header h1 span {
-  color: #45592B;
-  /* Will override color (regardless of order) */
-  -webkit-text-fill-color: #DFD3C7;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: #CD993D;
-  text-decoration: none; }
-
-.preview-wrapper {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding-top: 50px;
-  background: rgba(0, 0, 0, 0.7); }
-
-.preview-wrapper.active {
-  display: block; }
-
-.links {
-  vertical-align: top; }
+    box-sizing: border-box;
+  }
+  
+  .mar-bottom {
+    margin-bottom: 2rem;
+  }
+  
+  /* Typography */
+  @font-face {
+    font-family: 'Garamond';
+    src: url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161956a6b51536d021dfc1/1595283798852/GaramondThree.woff2') format('woff2'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619532fb07e1186e05b0d/1595283795938/GaramondThree.woff') format('woff'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16194fa6b51536d021dd87/1595283791677/GaramondThree.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Garamond-Italic';
+    src: url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161971fe54dd5188a48a1b/1595283825938/GaramondThree-Italic.woff2') format('woff2'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16196c7057b538deb89d70/1595283821065/GaramondThree-Italic.woff') format('woff'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161967906e646bb464562c/1595283815911/GaramondThree-Italic.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'TT-Drugs';
+    src: url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619897057b538deb8a55a/1595283849738/TTDrugs-Bold.woff2') format('woff2'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619853b72027be1c13f78/1595283846003/TTDrugs-Bold.woff') format('woff'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16197fa6b51536d021e572/1595283839907/TTDrugs-Bold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Canela';
+    src: url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f1619448cc72b1ccfd0dc61/1595283780808/Canela-Thin.woff2') format('woff2'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161941e1f89b30f983d09d/1595283777673/Canela-Thin.woff') format('woff'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f16193caba56b06240fc344/1595283772539/Canela-Thin.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Sweet-Sans';
+    src: url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c21a693541395463656/1595284514311/SweetSansPro-Bold.woff2') format('woff2'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c1e9fc86a3cecd2cda9/1595284510710/SweetSansPro-Bold.woff') format('woff'),
+         url('https://static1.squarespace.com/static/5f0e48c077d20d30ef67219a/t/5f161c19e05f851dbe94c117/1595284506202/SweetSansPro-Bold.ttf') format('truetype');
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1.0;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes pulse-color {
+    0% {
+      background: #FFF;
+    }
+    50% {
+      background-color: #F6D06B;
+    }
+    100% {
+      background: #FFF;
+    }
+  }
+  
+  /* Body styling */
+  body {
+    font-family: "TT-Drugs", "Helvetica Neue", helvetica, arial, sans-serif;
+    font-size: 16px;
+    background: #062232;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  body.pose {
+    animation: pulse-color 1s infinite;
+    animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+  
+  body.error {
+    background-color: #CD993D;
+  }
+  
+  body.pose #statustext,
+  body.ready #statustext {
+    animation: pulse 1s infinite;
+    animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+  
+  .status-text {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #CD993D;
+    font-size: 20px;
+    font-family: 'Ogg';
+  }
+  
+  main {
+    margin-bottom: 2rem;
+  }
+  
+  main a,
+  footer a {
+    color: #DFD3C8;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  main p {
+    font-family: 'Canela';
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+    color: #DFD3C8;
+  }
+  
+  .sms-status-header {
+    margin-top: 4rem;
+    font-size: 3rem;
+  }
+  
+  /* Button styling */
+  .btn {  
+    display: inline-block;
+    height: 60px;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    background: #062232;
+    color: #CD993D;
+    font-family: 'TT-Drugs', sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1.8px solid #CD993D;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .btn:hover,
+  .btn:focus,
+  .btn:active {
+    background: #CD993D;
+    color: #062232;
+    transition: .5s;
+  }
+  
+  .btn:disabled {
+    background: #062232;
+  }
+  
+  /* Header styling */
+  header {
+    width: 100%;
+    display: block;
+  }
+  
+  header #logo {
+    padding: 1.25rem;
+  }
+  
+  header img {
+    width: 40px;
+  }
+  
+  header #info a {
+    color: #DFD3C8;
+    text-decoration: none;
+    font-family: 'TT-Drugs', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .5px;
+  }
+  
+  header h1 {
+    position: relative;
+    margin: 0;
+    font-family: 'Sweet-Sans';
+    font-size: 3rem;
+    padding-top: 0;
+    text-transform: uppercase;
+    color: #DFD3C7;
+    -webkit-text-fill-color: #DFD3C7;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #CD993D;
+  }
+  
+  header h1 span {
+    color: #45592B;
+    -webkit-text-fill-color: #DFD3C7;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #CD993D;
+    text-decoration: none;
+  }
+  
+  /* Overlay styling */
+  .preview-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    background: rgba(0, 0, 0, 0.70);
+  }
+  
+  .preview-wrapper.active {
+    display: block;
+  }
+  
+  .links {
+    vertical-align: top;
+  }
+  
   @media screen and (max-width: 991px) {
     .links {
       width: 60%;
       margin-right: auto;
-      margin-left: auto; } }
+      margin-left: auto;
+    }
+  }
+  
   @media screen and (min-width: 992px) {
     .links {
       display: inline-block;
-      margin-left: 2.5rem; } }
-
-.preview {
-  max-height: calc(100% - 100px); }
+      margin-left: 2.5rem;
+    }
+  }
+  
+  .preview {
+    max-height: calc(100% - 100px);
+  }
+  
   @media screen and (max-width: 991px) {
     .preview {
-      width: 60%; } }
-
-.preview-download-btn {
-  /*   display: none; */ }
-
-.send-gif_container {
-  margin-bottom: 1.25rem; }
+      width: 60%;
+    }
+  }
+  
+  .send-gif_container {
+    margin-bottom: 1.25rem;
+  }
+  
   @media screen and (min-width: 992px) {
     .send-gif_container {
-      margin-bottom: 200px; } }
-
-.send-gif_header {
-  font-size: 2rem; }
-
-.send-gif_input {
-  border: none;
-  outline: none;
-  display: inline-block;
-  height: 60px;
-  padding: 0.625rem;
-  font-size: 20px; }
+      margin-bottom: 200px;
+    }
+  }
+  
+  .send-gif_header {
+    font-size: 2rem;
+  }
+  
+  .send-gif_input {
+    border: none;
+    outline: none;
+    display: inline-block;
+    height: 60px;
+    padding: 0.625rem;
+    font-size: 20px;
+  }
+  
   @media screen and (max-width: 991px) {
     .send-gif_input {
       max-width: 60%;
-      width: 100%; } }
-
-.send-gif_social-text {
-  font-size: 1.5rem;
-  margin-bottom: 2.5rem; }
-
-video {
-  display: none; }
-
-.video-mirror-container {
-  margin-right: auto;
-  margin-left: auto;
-  width: 75%;
-  border: 0 none;
-  /*   padding: 0 0 1.4rem 1.4rem; */
-  /*   background: pink; */
-  position: relative;
-  color: #000;
-  font-size: 1rem; }
+      width: 100%;
+    }
+  }
+  
+  .send-gif_social-text {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* Video mirror styling */
+  video {
+    display: none;
+  }
+  
+  .video-mirror-container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 75%;
+    border: 0 none;
+    position: relative;
+    color: #000;
+    font-size: 1rem;
+  }
+  
   @media screen and (min-width: 992px) {
     .video-mirror-container {
-      max-width: 625px; } }
-
-.video-mirror {
-  background: transparent;
-  padding: 1.25rem;
-  border: 1.8px solid #CD993D;
-  width: 100%; }
+      max-width: 625px;
+    }
+  }
+  
+  .video-mirror {
+    background: transparent;
+    padding: 1.25rem;
+    border: 1.8px solid #CD993D;
+    width: 100%;
+  }
